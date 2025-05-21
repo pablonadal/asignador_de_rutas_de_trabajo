@@ -15,6 +15,11 @@ asignador_de_rutas_de_trabajo/
 │   └── db_config.py               # Configuración de conexión a MySQL
 │
 ├── 📁utils/
+│   ├── db_queries/
+│   │   ├── __init__.py
+│   │   ├── get_coordinates.py         # Trae solo lat/lon
+│   │   ├── get_coordinates_by_date.py # Trae coordenadas por fecha 
+│   │   └── get_coordinates_with_tecno.py # Trae coordenadas + tecno
 │   ├── db_connection.py           # Función para leer coordenadas desde MySQL
 │   ├── clustering.py              # Algoritmo KMeans para agrupar domicilios
 │   ├── distance_matrix.py         # Lógica para consultar API de distancia
