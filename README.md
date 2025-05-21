@@ -33,3 +33,8 @@ asignador_de_rutas_de_trabajo/
 │   └── visualizaciones/           # (Opcional) mapas generados o imágenes
 
 
+GUIA DE LO QUE SE VA A LOGRAR
+1_ clustering geografico
+2_ obtener la matriz de distancia para cada vehiculo segun los domicilio asignados por zona
+3_ pasarle a OR-Tools esas matrices para que me de el orden optimo de las coordenadas a visitar
+4_ finalmente crear una url de maps con las coordenadas en orden para que genera la ruta y compartirla con el tecnico que utilice el vehiculo designado

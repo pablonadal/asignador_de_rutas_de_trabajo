@@ -1,0 +1,77 @@
+Grupo 0:
+  - Longitud: -67.688017, Latitud: -34.971387
+  - Longitud: -67.679076, Latitud: -34.991915
+  - Longitud: -67.679076, Latitud: -34.991915
+  - Longitud: -67.679076, Latitud: -34.991915
+  - Longitud: -67.679076, Latitud: -34.991915
+  - Longitud: -67.679076, Latitud: -34.991915
+  - Longitud: -67.679076, Latitud: -34.991915
+  - Longitud: -67.679076, Latitud: -34.991915
+  - Longitud: -67.679076, Latitud: -34.991915
+  - Longitud: -67.703223, Latitud: -34.968533
+  - Longitud: -67.703223, Latitud: -34.968533
+  - Longitud: -67.703223, Latitud: -34.968533
+  - Longitud: -67.703223, Latitud: -34.968533
+  - Longitud: -67.514790, Latitud: -35.003918
+  - Longitud: -67.689135, Latitud: -34.943452
+  - Longitud: -67.655209, Latitud: -34.997703
+  - Longitud: -67.673114, Latitud: -34.984223
+  - Longitud: -67.672743, Latitud: -34.987421
+
+Grupo 1:
+  - Longitud: -69.590920, Latitud: -35.495950
+  - Longitud: -69.590920, Latitud: -35.495950
+  - Longitud: -69.590920, Latitud: -35.495950
+  - Longitud: -69.593241, Latitud: -35.483548
+  - Longitud: -69.580213, Latitud: -35.499759
+  - Longitud: -69.584542, Latitud: -35.479689
+  - Longitud: -69.576701, Latitud: -35.468007
+  - Longitud: -69.580981, Latitud: -35.499001
+  - Longitud: -69.580737, Latitud: -35.499775
+  - Longitud: -69.571483, Latitud: -35.479396
+  - Longitud: -69.587400, Latitud: -35.471021
+  - Longitud: -69.576981, Latitud: -35.504291
+  - Longitud: -69.584651, Latitud: -35.494603
+  - Longitud: -69.579562, Latitud: -35.500022
+
+Grupo 2:
+  - Longitud: -69.014542, Latitud: -33.577364
+  - Longitud: -69.121985, Latitud: -33.735731
+  - Longitud: -69.018967, Latitud: -33.575732
+  - Longitud: -69.017895, Latitud: -33.571416
+  - Longitud: -69.064628, Latitud: -33.782743
+  - Longitud: -69.010915, Latitud: -33.578416
+  - Longitud: -69.008296, Latitud: -33.559736
+  - Longitud: -69.012900, Latitud: -33.585211
+  - Longitud: -69.044339, Latitud: -33.749944
+  - Longitud: -69.272217, Latitud: -33.516390
+  - Longitud: -69.078085, Latitud: -33.808027
+
+Grupo 3:
+  - Longitud: -68.314903, Latitud: -34.613424
+  - Longitud: -68.283255, Latitud: -34.624525
+  - Longitud: -68.361762, Latitud: -34.623583
+  - Longitud: -68.395272, Latitud: -34.574239
+  - Longitud: -68.359002, Latitud: -34.640763
+  - Longitud: -68.310055, Latitud: -34.622868
+  - Longitud: -68.310233, Latitud: -34.622535
+  - Longitud: -68.319258, Latitud: -34.604553
+  - Longitud: -68.306690, Latitud: -34.628512
+  - Longitud: -68.277268, Latitud: -34.581077
+  - Longitud: -68.340203, Latitud: -34.714894
+  - Longitud: -68.316153, Latitud: -34.584372
+  - Longitud: -68.339282, Latitud: -34.641358
+  - Longitud: -68.288133, Latitud: -34.633054
+  - Longitud: -68.277268, Latitud: -34.581077
+  - Longitud: -68.316153, Latitud: -34.584372
+  - Longitud: -68.366933, Latitud: -34.678143
+  - Longitud: -68.390991, Latitud: -34.708682
+
+Grupo 4:
+  - Longitud: -68.228003, Latitud: -34.722643
+  - Longitud: -68.228003, Latitud: -34.722643
+  - Longitud: -68.230722, Latitud: -34.724990
+  - Longitud: -68.230722, Latitud: -34.724990
+  - Longitud: -67.878089, Latitud: -34.590093
+  - Longitud: -67.883568, Latitud: -34.596602
+
