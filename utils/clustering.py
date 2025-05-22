@@ -34,16 +34,15 @@ def clustering_geografico_kmeans(df, n_clusters=3, plot=True):
         plt.title(f'Clustering geográfico con K-Means ({n_clusters} clusters)')
         plt.grid(True)
         plt.show()
-        # Guardar los grupos en un archivo TXT
-    # Guardar los grupos en un archivo TXT
-    with open("data\\grupos_kmeans.txt", "w") as f:
+
+    # Guardar los grupos en un archivo TXT con formato de listas
+    with open("data/grupos_kmeans.txt", "w") as f:
         for cluster_id in sorted(df_clean['cluster'].unique()):
-            f.write(f"Grupo {cluster_id}:\n")
             grupo = df_clean[df_clean['cluster'] == cluster_id]
+            f.write(f"grupo{cluster_id + 1} = [\n")
             for _, row in grupo.iterrows():
-                f.write(f"  - Longitud: {row['longitud']}, Latitud: {row['latitud']}\n")
-            f.write("\n")
-    
-    
-    print("Grupos guardados en 'data\\grupos_kmeans.txt'")
+                f.write(f'    "{row["latitud"]:.6f},{row["longitud"]:.6f}",\n')
+            f.write("]\n\n")
+
+    print("Grupos guardados en 'data/grupos_kmeans.txt'")
     return df_clean
