@@ -5,42 +5,51 @@ import shutil
 from dotenv import load_dotenv
 import requests
 
-def obtener_matriz_distancia(origen: str, destinos: list[str]):
+def obtener_matriz_completa(origen: str, destinos: list[str]):
     load_dotenv()
     api_key = os.getenv("API_KEY_DM")
 
     if not api_key:
         raise ValueError("No se encontró la variable API_KEY_DM en el archivo .env")
 
-    destinos_str = "|".join(destinos)
+    # Construimos lista completa de ubicaciones
+    ubicaciones = [origen] + destinos
+    matriz_resultado = []
 
-    url = (
-        f"https://api.distancematrix.ai/maps/api/distancematrix/json"
-        f"?origins={origen}"
-        f"&destinations={destinos_str}"
-        f"&key={api_key}"
-    )
+    for i, origen_actual in enumerate(ubicaciones):
+        destinos_str = "|".join(ubicaciones)
 
-    try:
-        response = requests.get(url)
-        response.raise_for_status()
-        data = response.json()
+        url = (
+            f"https://api.distancematrix.ai/maps/api/distancematrix/json"
+            f"?origins={origen_actual}"
+            f"&destinations={destinos_str}"
+            f"&key={api_key}"
+        )
 
-        resultados = []
-        for i, row in enumerate(data["rows"][0]["elements"]):
-            distancia_texto = row["distance"]["text"]
-            duracion_texto = row["duration"]["text"]
-            resultados.append({
-                "destino": destinos[i],
-                "distancia": distancia_texto,
-                "duracion": duracion_texto
-            })
+        try:
+            response = requests.get(url)
+            response.raise_for_status()
+            data = response.json()
 
-        return resultados
+            fila = []
+            for j, element in enumerate(data["rows"][0]["elements"]):
+                if "distance" in element:
+                    distancia_texto = element["distance"]["text"]
+                else:
+                    distancia_texto = "0 km"
+                fila.append(distancia_texto)
 
-    except Exception as e:
-        print(f"Error al obtener la matriz de distancia: {e}")
-        return []
+            matriz_resultado.append(fila)
+
+        except Exception as e:
+            print(f"Error al obtener distancias desde {origen_actual}: {e}")
+            return []
+
+    return {
+        "coordenadas": ubicaciones,
+        "matriz": matriz_resultado
+    }
+
 
 def limpiar_carpeta(carpeta: str):
     if os.path.exists(carpeta):
@@ -62,7 +71,7 @@ def procesar_grupos_y_guardar_matrices(archivo_txt: str, origen: str, carpeta_sa
         coordenadas = re.findall(r'"(.*?)"', coordenadas_raw)
         print(f"Procesando {nombre_grupo} con {len(coordenadas)} destinos...")
 
-        matriz = obtener_matriz_distancia(origen, coordenadas)
+        matriz = obtener_matriz_completa(origen, coordenadas)
 
         ruta_archivo = os.path.join(carpeta_salida, f"{nombre_grupo}_matriz.json")
         with open(ruta_archivo, "w", encoding="utf-8") as f:
