@@ -4,7 +4,7 @@ import os
 
 def get_coordinates_by_date_range(start_date, end_date, output_path='data/coordenadas_por_fecha.csv'):
     query = """
-        SELECT clientecordx AS longitud, clientecordy AS latitud
+        SELECT clientecordx AS longitud, clientecordy AS latitud, motivoordnombre
         FROM ordenes_filtradas
         WHERE fecha BETWEEN %s AND %s
     """
@@ -17,11 +17,11 @@ def get_coordinates_by_date_range(start_date, end_date, output_path='data/coorde
         cursor.execute(query, (start_date, end_date))
         rows = cursor.fetchall()
 
-        # Crear DataFrame
-        df = pd.DataFrame(rows, columns=['longitud', 'latitud'])
+        # Crear DataFrame con motivo
+        df = pd.DataFrame(rows, columns=['longitud', 'latitud', 'motivoordnombre'])
 
-        # Eliminar duplicados
-        df = df.drop_duplicates()
+        # Eliminar duplicados que tienen misma coord + mismo motivo
+        df = df.drop_duplicates(subset=['longitud', 'latitud', 'motivoordnombre'])
 
         # Crear carpeta si no existe
         os.makedirs(os.path.dirname(output_path), exist_ok=True)
