@@ -20,13 +20,16 @@ def get_coordinates_by_date_range(start_date, end_date, output_path='data/coorde
         # Crear DataFrame
         df = pd.DataFrame(rows, columns=['longitud', 'latitud'])
 
+        # Eliminar duplicados
+        df = df.drop_duplicates()
+
         # Crear carpeta si no existe
         os.makedirs(os.path.dirname(output_path), exist_ok=True)
 
         # Guardar como CSV
         df.to_csv(output_path, index=False, encoding='utf-8')
 
-        print(f"Coordenadas entre {start_date} y {end_date} guardadas en {output_path}")
+        print(f"Coordenadas únicas entre {start_date} y {end_date} guardadas en {output_path}")
 
     except Exception as e:
         print(f"Error: {e}")

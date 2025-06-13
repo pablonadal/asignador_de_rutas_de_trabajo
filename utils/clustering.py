@@ -3,18 +3,14 @@ import matplotlib.pyplot as plt
 from sklearn.cluster import KMeans
 from sklearn.preprocessing import StandardScaler
 
-def clustering_geografico_kmeans(df, n_clusters=3, plot=True):
-    """
-    Aplica clustering K-Means sobre coordenadas geográficas.
-    
-    Parámetros:
-    - df: DataFrame con columnas 'longitud' y 'latitud'
-    - n_clusters: número de clusters deseados (default: 3)
-    - plot: si True, muestra un gráfico de los clusters
+def clustering_geografico_kmeans(data, n_clusters=3, plot=True):
+    if isinstance(data, str):
+        df = pd.read_csv(data)
+    elif isinstance(data, pd.DataFrame):
+        df = data
+    else:
+        raise TypeError("El parámetro debe ser un DataFrame o la ruta a un archivo CSV.")
 
-    Devuelve:
-    - df_clean: DataFrame sin valores nulos con una columna 'cluster'
-    """
     if not {'longitud', 'latitud'}.issubset(df.columns):
         raise ValueError("El DataFrame debe contener las columnas 'longitud' y 'latitud'.")
 
@@ -35,7 +31,6 @@ def clustering_geografico_kmeans(df, n_clusters=3, plot=True):
         plt.grid(True)
         plt.show()
 
-    # Guardar los grupos en un archivo TXT con formato de listas
     with open("data/grupos_kmeans.txt", "w") as f:
         for cluster_id in sorted(df_clean['cluster'].unique()):
             grupo = df_clean[df_clean['cluster'] == cluster_id]
