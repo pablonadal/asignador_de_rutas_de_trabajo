@@ -6,6 +6,7 @@ from utils.maps_url_generator import generar_urls_google_maps
 from utils.helpers import asignar_motivos_a_grupos
 from utils.asignar_tiempoyhora_estimado import asignar_tiempos_estimados_a_destinos
 from utils.enviar_email_horadellegada import enviar_notificaciones_email
+from utils.enviar_urls_wsp import enviar_urls_whatsapp
 
 if __name__ == "__main__":
 
@@ -25,7 +26,7 @@ if __name__ == "__main__":
     # process_all_matrices()
     # print("Matrices procesadas y rutas ordenadas guardadas en 'output/rutas_ordenadas.json'")
 
-    # # # asignar motivos a grupos y guardar en CSV
+    # # asignar motivos a grupos y guardar en CSV
     # asignar_motivos_a_grupos("output/rutas_ordenadas.json", "data/coordenadas_por_fecha.csv")
     # print("Motivos asignados a grupos y guardados en 'data/grupos_con_motivos.csv'")
 
@@ -33,10 +34,14 @@ if __name__ == "__main__":
     # generar_urls_google_maps("output/rutas_ordenadas.json", "output/urls_google_maps.json")
     # print("Proceso completado. URLs generadas.")
 
-    # asignar a cada destino un tiempo de llegada estimado y guardar en CSV
-    asignar_tiempos_estimados_a_destinos("data/grupos_con_motivos.csv")
-    print("Tiempos y hora estimados asignados a destinos y guardados en 'data/resultados_con_tiempos.csv'")
+    # # asignar a cada destino un tiempo de llegada estimado y guardar en CSV
+    # asignar_tiempos_estimados_a_destinos("data/grupos_con_motivos.csv")
+    # print("Tiempos y hora estimados asignados a destinos y guardados en 'data/resultados_con_tiempos.csv'")
 
-    # Enviar notificaciones por email (opcional)
-    enviar_notificaciones_email("data/resultados_con_tiempos.csv")
-    print("Notificaciones enviadas por email (si está configurado).")
+    # # Enviar notificaciones por email
+    # enviar_notificaciones_email("data/resultados_con_tiempos.csv")
+    # print("Notificaciones enviadas por email (si está configurado).")
+
+    # Enviar urls de google maps a los tecnicos por whatsapp
+    enviar_urls_whatsapp("output/urls_google_maps.json")
+    print("URLs de Google Maps enviadas por WhatsApp.")
