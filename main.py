@@ -5,7 +5,7 @@ from utils.routing_solver import process_all_matrices
 from utils.maps_url_generator import generar_urls_google_maps
 from utils.helpers import asignar_motivos_a_grupos
 from utils.asignar_tiempoyhora_estimado import asignar_tiempos_estimados_a_destinos
-
+from utils.enviar_email_horadellegada import enviar_notificaciones_email
 
 if __name__ == "__main__":
 
@@ -37,6 +37,6 @@ if __name__ == "__main__":
     asignar_tiempos_estimados_a_destinos("data/grupos_con_motivos.csv")
     print("Tiempos y hora estimados asignados a destinos y guardados en 'data/resultados_con_tiempos.csv'")
 
-    # # Enviar notificaciones por email (opcional)
-    # enviar_notificaciones_email("data/resultados_con_tiempos.csv")
-    # print("Notificaciones enviadas por email (si está configurado).")
+    # Enviar notificaciones por email (opcional)
+    enviar_notificaciones_email("data/resultados_con_tiempos.csv")
+    print("Notificaciones enviadas por email (si está configurado).")

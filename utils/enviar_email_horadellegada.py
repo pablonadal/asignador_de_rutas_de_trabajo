@@ -40,7 +40,3 @@ def enviar_notificaciones_email(csv_path):
                 asunto=f"Notificación para destino del grupo {grupo}",
                 cuerpo=f"Tu técnico ya comenzó el recorrido, estará en tu domicilio aproximadamente a las {hora}."
             )
-
-# Ejecutar si se corre directamente
-if __name__ == "__main__":
-    enviar_notificaciones_email("data/resultados_con_tiempos.csv")
