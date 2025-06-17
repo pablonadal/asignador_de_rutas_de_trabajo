@@ -36,3 +36,7 @@ if __name__ == "__main__":
     # asignar a cada destino un tiempo de llegada estimado y guardar en CSV
     asignar_tiempos_estimados_a_destinos("data/grupos_con_motivos.csv")
     print("Tiempos y hora estimados asignados a destinos y guardados en 'data/resultados_con_tiempos.csv'")
+
+    # # Enviar notificaciones por email (opcional)
+    # enviar_notificaciones_email("data/resultados_con_tiempos.csv")
+    # print("Notificaciones enviadas por email (si está configurado).")
