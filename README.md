@@ -1,40 +1,47 @@
 estructura de carpeta y archivos:
 
 asignador_de_rutas_de_trabajo/
-│
-├── main.py                        # Script principal que ejecuta todo el flujo
-├── .env                           # Variables de entorno (DB, API keys)
-├── requirements.txt               # Dependencias del proyecto
-├── README.md                      # Documentación del proyecto
-│
-├── 📁data/
-│   ├── coordenadas_raw.csv        # Export opcional desde MySQL (para debug)
-│   └── matrices/                  # Matrices de distancia por móvil (JSON/CSV)
-│
-├── 📁config/
-│   └── db_config.py               # Configuración de conexión a MySQL
-│
-├── 📁utils/
-│   ├── db_queries/
-│   │   ├── __init__.py
-│   │   ├── get_coordinates.py         # Trae solo lat/lon
-│   │   ├── get_coordinates_by_date.py # Trae coordenadas por fecha 
-│   │   └── get_coordinates_with_tecno.py # Trae coordenadas + tecno
-│   ├── db_connection.py           # Función para leer coordenadas desde MySQL
-│   ├── clustering.py              # Algoritmo KMeans para agrupar domicilios
-│   ├── distance_matrix.py         # Lógica para consultar API de distancia
-│   ├── routing_solver.py          # OR-Tools: resolver orden óptimo de visitas
-│   ├── maps_url_generator.py      # Generar URL de Google Maps con coordenadas ordenadas
-│   └── helpers.py                 # Funciones auxiliares generales
-│
-├── 📁output/
-│   ├── rutas_ordenadas.json       # Rutas resultantes por móvil
-│   ├── urls_generadas.csv         # URLs para compartir por móvil
-│   └── visualizaciones/           # (Opcional) mapas generados o imágenes
+## 📁 Estructura del Proyecto
 
-
-GUIA DE LO QUE SE VA A LOGRAR
-1_ clustering geografico
-2_ obtener la matriz de distancia para cada vehiculo segun los domicilio asignados por zona
-3_ pasarle a OR-Tools esas matrices para que me de el orden optimo de las coordenadas a visitar
-4_ finalmente crear una url de maps con las coordenadas en orden para que genera la ruta y compartirla con el tecnico que utilice el vehiculo designado
+```plaintext
+.
+├── 🛠️ config/
+│   └── 📄 db_config.py              # Configuración de conexión a la base de datos
+│
+├── 📂 data/
+│   ├── 📁 matrices/
+│   │   ├── 📄 grupo1_matriz.json    # Matriz de distancias del grupo 1
+│   │   ├── 📄 grupo2_matriz.json    # Matriz de distancias del grupo 2
+│   ├── 📄 coordenadas_por_fecha.csv # Coordenadas extraídas por rango de fechas
+│   ├── 📄 coordenadas_raw.csv       # Coordenadas originales sin procesar
+│   ├── 📄 grupos_con_motivos.csv    # Datos agrupados con motivo asignado
+│   ├── 📄 grupos_kmeans.txt         # Resultados del clustering KMeans
+│   ├── 🌐 mapa.html                 # Visualización interactiva de las rutas
+│   └── 📄 resultados_con_tiempos.csv # Dataset final con tiempos estimados
+│
+├── 📤 output/
+│   ├── 📁 visualizaciones/
+│   │   └── 🖼️ Figure_1.png          # Imagen generada del análisis
+│   ├── 📄 rutas_ordenadas.csv       # Rutas en orden óptimo
+│   ├── 📄 rutas_ordenadas.json      # Rutas ordenadas en formato JSON
+│   ├── 📄 urls_generadas.csv        # URLs generadas para seguimiento
+│   └── 📄 urls_google_maps.json     # URLs en formato Google Maps
+│
+├── ⚙️ utils/
+│   ├── 🧩 db_queries/
+│   │   ├── 📄 get_coordinates_by_date.py       # Consulta coordenadas por fecha
+│   │   ├── 📄 get_coordinates.py               # Obtiene coordenadas generales
+│   │   └── 📄 asignar_tiempoyhora_estimado.py  # Asigna tiempos estimados por orden
+│   ├── 📄 clustering.py               # Lógica para clustering de coordenadas
+│   ├── 📄 distance_matrix.py         # Cálculo de matrices de distancia
+│   ├── 📄 enviar_email_horadellegada.py # Envía emails con hora de llegada
+│   ├── 📄 enviar_urls_whsp.py        # Envía URLs por WhatsApp
+│   ├── 📄 helpers.py                 # Funciones auxiliares
+│   ├── 📄 maps_url_generator.py      # Generador de enlaces de mapas
+│   └── 📄 routing_solver.py          # Solver del problema de ruteo (TSP)
+│
+├── 🔐 .env                 # Variables de entorno (API keys, config)
+├── 📄 .gitignore           # Archivos y carpetas a ignorar por Git
+├── 🚀 main.py              # Script principal del proyecto
+├── 📘 README.md            # Documentación general del proyecto
+└── 📦 requirements.txt     # Dependencias necesarias (pip)

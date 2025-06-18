@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 from sklearn.cluster import KMeans
 from sklearn.preprocessing import StandardScaler
 
-def clustering_geografico_kmeans(data, n_clusters=3, plot=True):
+def clustering_geografico_kmeans(data, n_clusters=3, plot=False):
     if isinstance(data, str):
         df = pd.read_csv(data)
     elif isinstance(data, pd.DataFrame):

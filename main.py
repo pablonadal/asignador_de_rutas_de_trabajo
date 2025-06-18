@@ -10,13 +10,13 @@ from utils.enviar_urls_wsp import enviar_urls_whatsapp
 
 if __name__ == "__main__":
 
-    # # obtener coordenadas desde la base de datos entre dos fechas y guardar en dataframe y CSV
-    # df_coords = get_coordinates_by_date_range('2025-05-04', '2025-05-04')
-    # print(df_coords.head())
+    # obtener coordenadas desde la base de datos entre dos fechas y guardar en dataframe y CSV
+    df_coords = get_coordinates_by_date_range('2025-05-04', '2025-05-04')
+    print(df_coords.head())
 
-    # # aplicar clustering KMeans y guardar en archivo TXT
-    # clustering_geografico_kmeans("data\coordenadas_por_fecha.csv", n_clusters=5)
-    # print("Clustering KMeans aplicado y grupos guardados en 'data/grupos_kmeans.txt'")
+    # aplicar clustering KMeans y guardar en archivo TXT
+    clustering_geografico_kmeans("data\coordenadas_por_fecha.csv", n_clusters=5)
+    print("Clustering KMeans aplicado y grupos guardados en 'data/grupos_kmeans.txt'")
 
     # # procesar grupos y guardar matrices de distancia en json
     # procesar_grupos_y_guardar_matrices("data\grupos_kmeans.txt", "-34.641042,-68.339570")
@@ -42,6 +42,6 @@ if __name__ == "__main__":
     # enviar_notificaciones_email("data/resultados_con_tiempos.csv")
     # print("Notificaciones enviadas por email (si está configurado).")
 
-    # Enviar urls de google maps a los tecnicos por whatsapp
-    enviar_urls_whatsapp("output/urls_google_maps.json")
-    print("URLs de Google Maps enviadas por WhatsApp.")
+    # # Enviar urls de google maps a los tecnicos por whatsapp
+    # enviar_urls_whatsapp("output/urls_google_maps.json")
+    # print("URLs de Google Maps enviadas por WhatsApp.")
