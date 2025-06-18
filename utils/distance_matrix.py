@@ -1,7 +1,6 @@
 import os
 import json
 import re
-import shutil
 from dotenv import load_dotenv
 import requests
 
