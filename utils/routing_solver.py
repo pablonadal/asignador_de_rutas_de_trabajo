@@ -1,5 +1,5 @@
-import os
 import json
+from pathlib import Path
 from ortools.constraint_solver import pywrapcp, routing_enums_pb2
 
 def parse_kilometers(dist_str):
@@ -12,22 +12,17 @@ def parse_kilometers(dist_str):
         raise ValueError(f"Formato de distancia no reconocido: {dist_str}")
 
 def create_distance_matrix(matrix_data):
-    """Convierte una matriz cuadrada en texto a valores numéricos para OR-Tools"""
     coordenadas = matrix_data["coordenadas"]
     matriz_texto = matrix_data["matriz"]
 
-    size = len(coordenadas)
-    distancia_numerica = []
-
-    for fila in matriz_texto:
-        fila_convertida = [parse_kilometers(valor) for valor in fila]
-        distancia_numerica.append(fila_convertida)
+    distancia_numerica = [
+        [parse_kilometers(valor) for valor in fila]
+        for fila in matriz_texto
+    ]
 
     return distancia_numerica, coordenadas
 
-
 def solve_tsp(distance_matrix):
-    """Usa OR-Tools para resolver el TSP y devuelve el orden de visitas."""
     manager = pywrapcp.RoutingIndexManager(len(distance_matrix), 1, 0)
     routing = pywrapcp.RoutingModel(manager)
 
@@ -52,19 +47,20 @@ def solve_tsp(distance_matrix):
     return route
 
 def process_all_matrices():
-    input_dir = os.path.join("data", "matrices")
-    output_path = os.path.join("output", "rutas_ordenadas.json")
+    input_dir = Path("data") / "matrices"
+    output_path = Path("output") / "rutas_ordenadas.json"
     result = {}
 
-    for filename in os.listdir(input_dir):
-        if filename.endswith(".json"):
-            with open(os.path.join(input_dir, filename), "r") as file:
-                data = json.load(file)
-                matrix, coords = create_distance_matrix(data)
-                route_indices = solve_tsp(matrix)
-                ordered_coords = [coords[i] for i in route_indices if coords[i] != 'origen']
-                result[filename] = ordered_coords
+    for filepath in input_dir.glob("*.json"):
+        with filepath.open("r", encoding="utf-8") as file:
+            data = json.load(file)
+            matrix, coords = create_distance_matrix(data)
+            route_indices = solve_tsp(matrix)
+            ordered_coords = [coords[i] for i in route_indices if coords[i] != 'origen']
+            result[filepath.stem] = ordered_coords
 
-    os.makedirs("output", exist_ok=True)
-    with open(output_path, "w") as f:
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    with output_path.open("w", encoding="utf-8") as f:
         json.dump(result, f, indent=2)
+
+    print(f"✅ Rutas ordenadas guardadas en '{output_path}'")

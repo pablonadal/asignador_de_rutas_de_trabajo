@@ -3,6 +3,7 @@ import numpy as np
 import requests
 import time
 from datetime import datetime, timedelta
+from pathlib import Path
 import os
 from dotenv import load_dotenv
 
@@ -14,6 +15,11 @@ def asignar_tiempos_estimados_a_destinos(
     output_path="data/resultados_con_tiempos.csv",
     api_key=API_KEY
 ):
+    # Convertir a objetos Path (por si se pasan como string)
+    csv_path = Path(csv_path)
+    output_path = Path(output_path)
+
+    # Leer el CSV
     df = pd.read_csv(csv_path)
 
     # Tiempos por motivo
@@ -51,7 +57,6 @@ def asignar_tiempos_estimados_a_destinos(
                     rsp = requests.get(url)
                     data = rsp.json()
                     print(data)
-                    # Verifica estructura rows → elements → status OK
                     elem = data["rows"][0]["elements"][0]
                     if elem.get("status") == "OK":
                         dur_seg = elem["duration"]["value"]
@@ -63,7 +68,7 @@ def asignar_tiempos_estimados_a_destinos(
                     print(f"❌ Error API: {e}. Simulo tiempo.")
                     tiempo_viaje = np.random.randint(5, 16)
 
-                time.sleep(1)  # evitar limites
+                time.sleep(1)
             else:
                 tiempo_viaje = np.random.randint(5, 16)
                 print(f"⚠️ API_KEY no configurada. Simulo tiempo de {tiempo_viaje} mins.")
@@ -79,6 +84,10 @@ def asignar_tiempos_estimados_a_destinos(
         lambda m: (inicio + timedelta(minutes=m)).strftime("%H:%M")
     )
 
+    # Crear carpeta de salida si no existe
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+
+    # Guardar el archivo
     df.to_csv(output_path, index=False)
     print(f"✅ Resultado guardado en {output_path}")
     return df

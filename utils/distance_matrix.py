@@ -1,8 +1,9 @@
-import os
 import json
 import re
+from pathlib import Path
 from dotenv import load_dotenv
 import requests
+import os
 
 def obtener_matriz_completa(origen: str, destinos: list[str]):
     load_dotenv()
@@ -11,7 +12,6 @@ def obtener_matriz_completa(origen: str, destinos: list[str]):
     if not api_key:
         raise ValueError("No se encontró la variable API_KEY_DM en el archivo .env")
 
-    # Construimos lista completa de ubicaciones
     ubicaciones = [origen] + destinos
     matriz_resultado = []
 
@@ -32,16 +32,13 @@ def obtener_matriz_completa(origen: str, destinos: list[str]):
 
             fila = []
             for j, element in enumerate(data["rows"][0]["elements"]):
-                if "distance" in element:
-                    distancia_texto = element["distance"]["text"]
-                else:
-                    distancia_texto = "0 km"
+                distancia_texto = element.get("distance", {}).get("text", "0 km")
                 fila.append(distancia_texto)
 
             matriz_resultado.append(fila)
 
         except Exception as e:
-            print(f"Error al obtener distancias desde {origen_actual}: {e}")
+            print(f"❌ Error al obtener distancias desde {origen_actual}: {e}")
             return []
 
     return {
@@ -50,30 +47,33 @@ def obtener_matriz_completa(origen: str, destinos: list[str]):
     }
 
 
-def limpiar_carpeta(carpeta: str):
-    if os.path.exists(carpeta):
-        for archivo in os.listdir(carpeta):
-            ruta_archivo = os.path.join(carpeta, archivo)
-            if os.path.isfile(ruta_archivo):
-                os.remove(ruta_archivo)
+def limpiar_carpeta(carpeta: Path):
+    if carpeta.exists() and carpeta.is_dir():
+        for archivo in carpeta.iterdir():
+            if archivo.is_file():
+                archivo.unlink()
+
 
 def procesar_grupos_y_guardar_matrices(archivo_txt: str, origen: str, carpeta_salida: str = "data/matrices"):
-    os.makedirs(carpeta_salida, exist_ok=True)
+    carpeta_salida = Path(carpeta_salida)
+    carpeta_salida.mkdir(parents=True, exist_ok=True)
+
     limpiar_carpeta(carpeta_salida)
 
-    with open(archivo_txt, "r", encoding="utf-8") as file:
+    archivo_txt = Path(archivo_txt)
+    with archivo_txt.open("r", encoding="utf-8") as file:
         contenido = file.read()
 
     grupos = re.findall(r"(grupo\d+)\s*=\s*\[(.*?)\]", contenido, re.DOTALL)
 
     for nombre_grupo, coordenadas_raw in grupos:
         coordenadas = re.findall(r'"(.*?)"', coordenadas_raw)
-        print(f"Procesando {nombre_grupo} con {len(coordenadas)} destinos...")
+        print(f"🔄 Procesando {nombre_grupo} con {len(coordenadas)} destinos...")
 
         matriz = obtener_matriz_completa(origen, coordenadas)
 
-        ruta_archivo = os.path.join(carpeta_salida, f"{nombre_grupo}_matriz.json")
-        with open(ruta_archivo, "w", encoding="utf-8") as f:
+        ruta_archivo = carpeta_salida / f"{nombre_grupo}_matriz.json"
+        with ruta_archivo.open("w", encoding="utf-8") as f:
             json.dump(matriz, f, indent=2, ensure_ascii=False)
 
-        print(f"{nombre_grupo} guardado en {ruta_archivo}")
+        print(f"✅ {nombre_grupo} guardado en {ruta_archivo}")
