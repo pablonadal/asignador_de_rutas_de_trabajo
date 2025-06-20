@@ -1,5 +1,10 @@
 estructura de carpeta y archivos:
 
+a tener en cuenta:
+tokens y url de distintas apis actualizadas para usar las versiones gratuitas
+
+
+
 asignador_de_rutas_de_trabajo/
 ## 📁 Estructura del Proyecto
 
