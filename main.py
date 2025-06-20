@@ -59,7 +59,7 @@ if __name__ == "__main__":
     print(f"Matrices procesadas y rutas ordenadas guardadas en '{path_rutas_json}'")
 
     # Esperar a que se cree el archivo de rutas ordenadas
-    esperar_archivo(path_rutas_json)
+    esperar_archivo(path_coords_csv)
     # Asignar motivos por grupo
     esperar_archivo(path_rutas_json)
     asignar_motivos_a_grupos(path_rutas_json, path_coords_csv)
