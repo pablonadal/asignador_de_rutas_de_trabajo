@@ -16,8 +16,8 @@ __pycache__/
 *.bak
 
 # Archivos generados
-# *.csv
-# .json
+*.csv
+.json
 
 # Archivos de salida del proyecto
 /output/

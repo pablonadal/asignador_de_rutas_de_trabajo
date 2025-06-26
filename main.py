@@ -46,43 +46,43 @@ if __name__ == "__main__":
     # clustering_geografico_kmeans(path_coords_csv, n_clusters=5)
     # print(f"Clustering KMeans aplicado y grupos guardados en '{path_kmeans_txt}'")
 
-    # Esperar a que se cree el archivo de grupos KMeans
-    esperar_archivo(path_kmeans_txt)
-    # Procesar grupos y guardar matrices de distancia
-    procesar_grupos_y_guardar_matrices(path_kmeans_txt, "-34.641042,-68.339570")
-    print("Matrices de distancia procesadas y guardadas en 'data/matrices'")
+    # # Esperar a que se cree el archivo de grupos KMeans
+    # esperar_archivo(path_kmeans_txt)
+    # # Procesar grupos y guardar matrices de distancia
+    # procesar_grupos_y_guardar_matrices(path_kmeans_txt, "-34.641042,-68.339570")
+    # print("Matrices de distancia procesadas y guardadas en 'data/matrices'")
 
-    # Esperar a que se creen las matrices de distancia
-    esperar_archivo(Path("data/matrices"))
-    # Resolver TSP y guardar rutas ordenadas
-    process_all_matrices()
-    print(f"Matrices procesadas y rutas ordenadas guardadas en '{path_rutas_json}'")
+    # # Esperar a que se creen las matrices de distancia
+    # esperar_archivo(Path("data/matrices"))
+    # # Resolver TSP y guardar rutas ordenadas
+    # process_all_matrices()
+    # print(f"Matrices procesadas y rutas ordenadas guardadas en '{path_rutas_json}'")
 
-    # Esperar a que se cree el archivo de rutas ordenadas
-    # esperar_archivo(path_coords_csv)
-    # Asignar motivos por grupo
-    esperar_archivo(path_rutas_json)
-    asignar_motivos_a_grupos(path_rutas_json, path_coords_csv)
-    print(f"Motivos asignados a grupos y guardados en '{path_grupos_motivos_csv}'")
+    # # Esperar a que se cree el archivo de rutas ordenadas
+    # # esperar_archivo(path_coords_csv)
+    # # Asignar motivos por grupo
+    # esperar_archivo(path_rutas_json)
+    # asignar_motivos_a_grupos(path_rutas_json, path_coords_csv)
+    # print(f"Motivos asignados a grupos y guardados en '{path_grupos_motivos_csv}'")
 
-    # Esperar a que se cree el archivo de grupos con motivos
-    esperar_archivo(path_grupos_motivos_csv)
-    # Generar URLs de Google Maps
-    generar_urls_google_maps(path_rutas_json, path_urls_json)
-    print("Proceso completado. URLs generadas.")
+    # # Esperar a que se cree el archivo de grupos con motivos
+    # esperar_archivo(path_grupos_motivos_csv)
+    # # Generar URLs de Google Maps
+    # generar_urls_google_maps(path_rutas_json, path_urls_json)
+    # print("Proceso completado. URLs generadas.")
 
-    # Esperar a que se creen las URLs de Google Maps
-    esperar_archivo(path_urls_json)
-    # Asignar tiempos estimados y guardar CSV
-    asignar_tiempos_estimados_a_destinos(path_grupos_motivos_csv)
-    print(f"Tiempos y hora estimados asignados a destinos y guardados en '{path_resultados_csv}'")
+    # # Esperar a que se creen las URLs de Google Maps
+    # esperar_archivo(path_urls_json)
+    # # Asignar tiempos estimados y guardar CSV
+    # asignar_tiempos_estimados_a_destinos(path_grupos_motivos_csv)
+    # print(f"Tiempos y hora estimados asignados a destinos y guardados en '{path_resultados_csv}'")
 
-    # Esperar a que se cree el archivo de resultados con tiempos
-    esperar_archivo(path_resultados_csv)
-    # Enviar notificaciones por email
-    enviar_notificaciones_email(path_resultados_csv)
-    print("Notificaciones enviadas por email (si está configurado).")
+    # # Esperar a que se cree el archivo de resultados con tiempos
+    # esperar_archivo(path_resultados_csv)
+    # # Enviar notificaciones por email
+    # enviar_notificaciones_email(path_resultados_csv)
+    # print("Notificaciones enviadas por email (si está configurado).")
 
-    # Enviar URLs por WhatsApp
-    enviar_urls_whatsapp(path_urls_json)
-    print("URLs de Google Maps enviadas por WhatsApp.")
+    # # Enviar URLs por WhatsApp
+    # enviar_urls_whatsapp(path_urls_json)
+    # print("URLs de Google Maps enviadas por WhatsApp.")
