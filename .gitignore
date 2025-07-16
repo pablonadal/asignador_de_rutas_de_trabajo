@@ -39,3 +39,6 @@ Thumbs.db
 .vscode/
 .idea/
 *.swp
+
+# Dependencias de Node.js
+mobile_app/node_modules/

@@ -50,3 +50,17 @@ asignador_de_rutas_de_trabajo/
 ├── 🚀 main.py              # Script principal del proyecto
 ├── 📘 README.md            # Documentación general del proyecto
 └── 📦 requirements.txt     # Dependencias necesarias (pip)
+
+INICIAR EN LOCAL
+Correr el comando en la Raiz del proyecto para activar entorno virtual: venv\Scripts\activate
+Correr el comando en la Raiz del proyecto para correr el servidor: uvicorn main:app --reload
+🌐 Una vez iniciado, accedés desde tu navegador a:
+Documentación Swagger (interactiva):
+http://127.0.0.1:8000/docs
+
+Documentación Redoc (alternativa):
+http://127.0.0.1:8000/redoc
+
+Endpoint raíz:
+http://127.0.0.1:8000/
+
